@@ -42,39 +42,6 @@ namespace SB.Test
 		{
 			CreateItem();
 		}
-
-		private void CreateCategory()
-		{
-			var category = new List<Entity_Category>
-			{
-				new Entity_Category()
-				{
-					Id = 1,
-					Name = "Test Category 1",
-					CreatedOn = DateTime.Now,
-					UpdatedOn = DateTime.Now,
-					IsDeleted = false
-				},
-				new Entity_Category()
-				{
-					Id = 2,
-					Name = "Test Category 2",
-					CreatedOn = DateTime.Now,
-					UpdatedOn = DateTime.Now,
-					IsDeleted = false
-				},
-				new Entity_Category()
-				{
-					Id = 3,
-					Name = "Test Category 3",
-					CreatedOn = DateTime.Now,
-					UpdatedOn = DateTime.Now,
-					IsDeleted = false
-				}
-			};
-			context.Categories.AddRange(category);
-			context.SaveChanges();
-		}
 		private void CreateItem()
 		{
 			var items = new List<Entity_Item>
