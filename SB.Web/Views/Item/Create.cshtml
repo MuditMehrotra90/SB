@@ -1,0 +1,72 @@
+﻿@model SB.Web.Models.Item.CreateOrEditViewModel
+
+@{
+	ViewBag.Title = Model.CreateOrEditInputDto.Id > 0 ? "Edit Item" : "Create Item";
+}
+@section Scripts{
+
+	@await Html.PartialAsync("/Views/Shared/_ValidationScriptsPartial.cshtml")
+}
+<div id="itemForm">
+	<h2><i class="fa fa-plus-square"></i> @(Model.CreateOrEditInputDto.Id > 0 ? "Edit " : "Create ")</h2>
+
+	@using (Html.BeginForm(FormMethod.Post))
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+			<div style="display:inline;float:left;">
+				<h4>Item</h4>
+			</div>
+			<div class="clearfix"></div>
+			<hr />
+			<div class="form-group required">
+				<div class="col-md-4">
+					@Html.LabelFor(x => x.CreateOrEditInputDto.Category_ID_FK, new { @class = "control-label" })
+				</div>
+				<div class="col-md-7">
+					@Html.DropDownListFor(x => x.CreateOrEditInputDto.Category_ID_FK, Model.Categories, "Select Category", new { @class = "form-control", @required = "required" })
+					@Html.ValidationMessageFor(x => x.CreateOrEditInputDto.Category_ID_FK, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group required">
+				@Html.LabelFor(x => x.CreateOrEditInputDto.Name, new { @class = "control-label col-md-4" })
+				<div class="col-md-7">
+					@Html.TextBoxFor(x => x.CreateOrEditInputDto.Name, new { @class = "form-control", @required = "required" })
+					@Html.ValidationMessageFor(x => x.CreateOrEditInputDto.Name, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+			<div class="form-group required">
+				@Html.LabelFor(x => x.CreateOrEditInputDto.ItemCode, new { @class = "control-label col-md-4" })
+				<div class="col-md-7">
+					@Html.TextBoxFor(x => x.CreateOrEditInputDto.ItemCode, new { @class = "form-control", @required = "required" })
+					@Html.ValidationMessageFor(x => x.CreateOrEditInputDto.ItemCode, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group required">
+				@Html.LabelFor(x => x.CreateOrEditInputDto.Price, new { @class = "control-label col-md-4" })
+				<div class="col-md-7">
+					@Html.TextBoxFor(x => x.CreateOrEditInputDto.Price, new { @class = "form-control", @required = "required" })
+					@Html.ValidationMessageFor(x => x.CreateOrEditInputDto.Price, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(x => x.CreateOrEditInputDto.Description, new { @class = "control-label col-md-4" })
+				<div class="col-md-7">
+					@Html.TextAreaFor(x => x.CreateOrEditInputDto.Description, new { @class = "form-control" })
+				</div>
+			</div>
+			@Html.HiddenFor(x => x.CreateOrEditInputDto.Id)
+
+			<div class="form-group">
+				<div class="col-md-offset-5 col-md-7">
+					<input type="submit" value="Save" class="btn btn-success" />
+					<input type="button" id="btnCancel" value="Cancel" class="btn btn-danger" onclick="javascript:document.location.href='@Url.Action("Index", "Item")'"  />
+				</div>
+			</div>
+		</div>
+	}
+
+</div>
